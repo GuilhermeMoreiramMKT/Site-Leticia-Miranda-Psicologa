@@ -25,12 +25,16 @@ if (raw.startsWith("{")) {
     credentials.private_key = credentials.private_key.replace(/\\n/g, "\n");
   }
 
-console.log("PRIVATE KEY CHECK", {
-  hasPrivateKey: Boolean(credentials.private_key),
-  startsWithBegin: credentials.private_key?.startsWith("-----BEGIN PRIVATE KEY-----"),
-  includesEnd: credentials.private_key?.includes("-----END PRIVATE KEY-----"),
-  length: credentials.private_key?.length,
-});
+throw new Error(
+  "PRIVATE KEY CHECK: " +
+    JSON.stringify({
+      hasPrivateKey: Boolean(credentials.private_key),
+      startsWithBegin: credentials.private_key?.startsWith("-----BEGIN PRIVATE KEY-----"),
+      includesEnd: credentials.private_key?.includes("-----END PRIVATE KEY-----"),
+      length: credentials.private_key?.length,
+      firstChars: credentials.private_key?.slice(0, 30),
+    })
+);
 
   return credentials;
 }
