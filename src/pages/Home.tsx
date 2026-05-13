@@ -59,13 +59,19 @@ export default function Home() {
     submitContact.mutate(
       { data: values },
       {
-        onSuccess: () => {
-          toast.success(
-            "Obrigada pelo seu contato. Sei que, muitas vezes, esse primeiro passo não é simples. Em breve retornarei sua mensagem!",
-            { duration: 6000 }
-          );
-          form.reset();
-        },
+      onSuccess: () => {
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "conversion", {
+      send_to: "AW-18161384693/dSg7CIn0xKwcEPX5gtRD",
+    });
+  }
+
+  toast.success(
+    "Obrigada pelo seu contato. Sei que, muitas vezes, esse primeiro passo não é simples. Em breve retornarei sua mensagem!",
+    { duration: 6000 }
+  );
+  form.reset();
+},
         onError: () => {
           toast.error("Houve um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato pelo WhatsApp.");
         },
