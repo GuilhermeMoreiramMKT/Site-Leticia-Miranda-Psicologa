@@ -25,6 +25,13 @@ if (raw.startsWith("{")) {
     credentials.private_key = credentials.private_key.replace(/\\n/g, "\n");
   }
 
+console.log("PRIVATE KEY CHECK", {
+  hasPrivateKey: Boolean(credentials.private_key),
+  startsWithBegin: credentials.private_key?.startsWith("-----BEGIN PRIVATE KEY-----"),
+  includesEnd: credentials.private_key?.includes("-----END PRIVATE KEY-----"),
+  length: credentials.private_key?.length,
+});
+
   return credentials;
 }
 
