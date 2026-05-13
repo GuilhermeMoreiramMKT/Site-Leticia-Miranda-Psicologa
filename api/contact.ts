@@ -18,7 +18,15 @@ function getServiceAccountCredentials() {
   if (!raw) throw new Error("GOOGLE_SERVICE_ACCOUNT_JSON is not set");
   raw = raw.trim();
 
-  if (raw.startsWith("{")) return JSON.parse(raw);
+if (raw.startsWith("{")) {
+  const credentials = JSON.parse(raw);
+
+  if (credentials.private_key) {
+    credentials.private_key = credentials.private_key.replace(/\\n/g, "\n");
+  }
+
+  return credentials;
+}
 
   if (raw.charCodeAt(0) === 34 && !raw.startsWith('"{')) {
     return JSON.parse("{" + raw);
