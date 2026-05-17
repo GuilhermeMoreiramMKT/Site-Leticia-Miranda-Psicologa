@@ -192,7 +192,10 @@ export default function Home() {
               Letícia Miranda | Psicóloga Clínica | CRP 06/180091
             </motion.p>
             <motion.h1 variants={fadeInUp} className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] text-foreground mb-6">
-              Um espaço seguro para compreender sua mente, fortalecer suas emoções e enfrentar seus desafios internos.
+              Atendimento online para adolescentes, adultos e idosos em um espaço seguro de escuta, acolhimento e autoconhecimento.
+              <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+  Um espaço seguro para compreender sua mente, fortalecer suas emoções e enfrentar seus desafios internos.
+</motion.p>
             </motion.h1>
             
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mt-8">
