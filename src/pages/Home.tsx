@@ -243,7 +243,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-center max-w-3xl mx-auto mb-16"
           >
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">A Importância da Psicoterapia</h2>
+            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">A importância da psicoterapia para sua saúde emocional</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
           </motion.div>
 
@@ -381,7 +381,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Formações</h2>
+            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Formação profissional em Psicologia e Psicanálise</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
           </motion.div>
 
@@ -439,7 +439,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-center max-w-3xl mx-auto mb-16"
           >
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Como Posso Ajudar</h2>
+            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Como a psicoterapia online pode ajudar você</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
           </motion.div>
 
@@ -478,7 +478,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Como Funciona o Atendimento</h2>
+            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Como funciona o atendimento psicológico online</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
           </motion.div>
 
@@ -518,7 +518,7 @@ export default function Home() {
       <section className="py-24 bg-secondary/20">
         <div className="container mx-auto px-6 max-w-3xl">
           <div className="text-center mb-16">
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Perguntas Frequentes</h2>
+            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Perguntas frequentes sobre terapia online</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
           </div>
 
@@ -549,7 +549,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row gap-16">
             
             <div className="w-full lg:w-1/2">
-              <h2 className="font-serif text-4xl text-foreground mb-6">Comece sua jornada de autoconhecimento</h2>
+              <h2 className="font-serif text-4xl text-foreground mb-6">Comece sua jornada de autoconhecimento com a terapia online</h2>
               <p className="text-xl text-muted-foreground mb-10">
                 Um espaço acolhedor para cuidar da sua saúde emocional e compreender sua história.
               </p>
