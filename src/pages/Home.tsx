@@ -64,6 +64,10 @@ export default function Home() {
     window.gtag("event", "conversion", {
      send_to: GOOGLE_ADS_CONVERSION_ID,
     });
+    window.gtag("event", "form_submit", {
+  form_name: "contact_form",
+  page_location: window.location.href,
+     });
   }
 
   toast.success(
