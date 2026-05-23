@@ -21,10 +21,9 @@ import portraitImg from "@/assets/Leticia_nova.png";
 import logoImg from "@assets/Logo_Le-removebg-preview_1778616799049.png";
 const GOOGLE_ADS_CONVERSION_ID = "AW-18161384693/dSg7CIn0xKwcEPX5gtRD";
 const WHATSAPP_LINK = "https://dub.sh/comecarjornada";
-function trackWhatsappClick(buttonLocation: string) {
+function trackWhatsappClick(eventName: string) {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
-    window.gtag("event", "whatsapp_click", {
-      button_location: buttonLocation,
+    window.gtag("event", eventName, {
       page_location: window.location.href,
     });
   }
@@ -215,7 +214,7 @@ export default function Home() {
                 size="lg" 
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-14 text-base font-medium shadow-sm gap-2"
                onClick={() => {
-  trackWhatsappClick("hero_primary");
+  trackWhatsappClick("whatsapp_click_hero");
   window.open(WHATSAPP_LINK, "_blank");
 }}
                 data-testid="button-hero-cta-1"
@@ -329,7 +328,7 @@ export default function Home() {
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-14 text-base font-medium shadow-sm"
                 onClick={() => {
-  trackWhatsappClick("section_cta");
+  trackWhatsappClick("whatsapp_click_section");
   window.open(WHATSAPP_LINK, "_blank");
 }}
               >
@@ -748,7 +747,7 @@ export default function Home() {
       {/* Floating WhatsApp Button */}
       <a 
         href={WHATSAPP_LINK}
-        onClick={() => trackWhatsappClick("link_whatsapp")}
+        onClick={() => trackWhatsappClick("whatsapp_click_link")}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50"
