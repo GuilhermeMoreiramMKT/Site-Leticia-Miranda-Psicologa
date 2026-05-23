@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { useSubmitContact } from "@/lib/api";
 import heroBg from "@/assets/hero-bg.png";
 import spaceImg from "@assets/Espaco_1778616799055.jpeg";
-import portraitImg from "@/assets/Leticia_nova.png";
+import portraitImg from "@/assets/Leticia-foto.JPEG";
 import logoImg from "@assets/Logo_Le-removebg-preview_1778616799049.png";
 const GOOGLE_ADS_CONVERSION_ID = "AW-18161384693/dSg7CIn0xKwcEPX5gtRD";
 const WHATSAPP_LINK = "https://dub.sh/comecarjornada";
