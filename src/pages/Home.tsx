@@ -266,7 +266,7 @@ export default function Home() {
               <img 
                 src={portraitImg} 
                 alt="Letícia Miranda" 
-                className="w-full rounded-2xl shadow-xl relative z-10 object-cover object-top" 
+                className="w-[80%] mx-auto rounded-2xl shadow-xl relative z-10 object-cover object-top" 
               />
             </motion.div>
             
