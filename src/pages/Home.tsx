@@ -126,7 +126,7 @@ export default function Home() {
           isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm py-4" : "bg-transparent py-6"
         }`}
       >
-        <div className="container mx-auto px-6 max-w-6xl flex items-center justify-between">
+        <div className="container mx-auto px-1 max-w-6xl flex items-center justify-between">
           <div 
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => scrollToSection("home")}
@@ -148,7 +148,7 @@ export default function Home() {
           </nav>
 
           <Button 
-            className="hidden md:flex bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6"
+            className="hidden md:flex bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-1"
             onClick={() => scrollToSection("contato")}
             data-testid="button-nav-cta"
           >
@@ -172,7 +172,7 @@ export default function Home() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed inset-0 z-40 bg-white pt-24 px-6 md:hidden flex flex-col gap-6"
+            className="fixed inset-0 z-40 bg-white pt-24 px-1 md:hidden flex flex-col gap-6"
           >
             <button onClick={() => scrollToSection("home")} className="text-xl font-serif text-left border-b pb-4">Início</button>
             <button onClick={() => scrollToSection("sobre")} className="text-xl font-serif text-left border-b pb-4">Sobre</button>
@@ -196,7 +196,7 @@ export default function Home() {
           <img src={heroBg} alt="Cozy therapy room" className="w-full h-full object-cover object-center" />
         </div>
         
-        <div className="container mx-auto px-6 max-w-6xl relative z-20">
+        <div className="container mx-auto px-1 max-w-6xl relative z-20">
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -253,7 +253,7 @@ export default function Home() {
       </section>
       {/* Sobre a Psicóloga */}
       <section id="sobre" className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto px-1 max-w-6xl">
           <div className="flex flex-col md:flex-row items-start gap-16">
             <motion.div 
               initial={{ opacity: 0, x: -40 }}
@@ -302,7 +302,7 @@ export default function Home() {
 
       {/* Formações */}
       <section className="py-20 bg-secondary/20">
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto px-1 max-w-6xl">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -360,7 +360,7 @@ export default function Home() {
 
       {/* A Importância da Psicoterapia */}
       <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto px-1 max-w-6xl">
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -408,7 +408,7 @@ export default function Home() {
 
       {/* Transitional Section */}
       <section className="py-24 bg-secondary/20">
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto px-1 max-w-6xl">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -453,7 +453,7 @@ export default function Home() {
 
       {/* Como Posso Ajudar */}
       <section id="especialidades" className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto px-1 max-w-6xl">
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -492,7 +492,7 @@ export default function Home() {
 
       {/* Como Funciona */}
       <section id="como-funciona" className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-4xl">
+        <div className="container mx-auto px-1 max-w-4xl">
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -538,7 +538,7 @@ export default function Home() {
 
       {/* FAQ */}
       <section className="py-24 bg-secondary/20">
-        <div className="container mx-auto px-6 max-w-3xl">
+        <div className="container mx-auto px-1 max-w-3xl">
           <div className="text-center mb-16">
             <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Perguntas frequentes sobre terapia online</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
@@ -553,10 +553,10 @@ export default function Home() {
               { q: "Você atende adolescentes?", a: "Sim. Realizo atendimento psicológico para adolescentes, considerando as singularidades, os atravessamentos emocionais e as transformações próprias dessa fase da vida. A psicoterapia pode ajudar o adolescente a construir mais compreensão sobre o que sente, fortalecendo seus recursos emocionais e sua relação consigo mesmo." },
             ].map((item, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-b-0">
-                <AccordionTrigger className="font-serif text-xl px-4 hover:no-underline hover:text-primary transition-colors text-left">
+                <AccordionTrigger className="font-serif text-xl px-1 hover:no-underline hover:text-primary transition-colors text-left">
                   {item.q}
                 </AccordionTrigger>
-                <AccordionContent className="px-4 text-muted-foreground text-base leading-relaxed">
+                <AccordionContent className="px-1 text-muted-foreground text-base leading-relaxed">
                   {item.a}
                 </AccordionContent>
               </AccordionItem>
@@ -567,7 +567,7 @@ export default function Home() {
 
       {/* CTA / Contact Form */}
       <section id="contato" className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto px-1 max-w-6xl">
           <div className="flex flex-col lg:flex-row gap-16">
             
             <div className="w-full lg:w-1/2">
@@ -698,7 +698,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-foreground text-white py-16">
-        <div className="container mx-auto px-6 max-w-6xl">
+        <div className="container mx-auto px-1 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             <div>
               <div className="flex items-center gap-3 mb-6">
