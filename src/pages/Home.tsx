@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Heart, Brain, Users, Sparkles, Sun, Compass, Shield, Menu, X, ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,13 @@ import { toast } from "sonner";
 import { useSubmitContact } from "@/lib/api";
 import heroBg from "@/assets/hero-bg.png";
 import spaceImg from "@assets/Espaco_1778616799055.jpeg";
-import portraitImg from "@/assets/Leticia-foto.JPEG";
+import portraitImg from "@/assets/Leticia-foto.png";
 import logoImg from "@assets/Logo_Le-removebg-preview_1778616799049.png";
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
 const GOOGLE_ADS_CONVERSION_ID = "AW-18161384693/dSg7CIn0xKwcEPX5gtRD";
 const WHATSAPP_LINK = "https://dub.sh/comecarjornada";
 function trackWhatsappClick(eventName: string) {
@@ -98,7 +103,7 @@ export default function Home() {
     }
   };
 
-  const fadeInUp = {
+  const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };
@@ -246,99 +251,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
-      {/* A Importância da Psicoterapia */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">A importância da psicoterapia para sua saúde emocional</h2>
-            <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
-          </motion.div>
-
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-          >
-            {[
-              { icon: <Heart className="w-6 h-6 text-primary" />, title: "Entender suas emoções", desc: "Compreenda melhor o que você sente e por quê." },
-              { icon: <Users className="w-6 h-6 text-primary" />, title: "Melhorar relacionamentos", desc: "Desenvolva conexões mais saudáveis e significativas." },
-              { icon: <Brain className="w-6 h-6 text-primary" />, title: "Reduzir ansiedade", desc: "Aprenda técnicas para lidar com preocupações excessivas." },
-              { icon: <Sun className="w-6 h-6 text-primary" />, title: "Lidar com depressão", desc: "Encontre luz mesmo nos momentos mais difíceis." },
-              { icon: <Shield className="w-6 h-6 text-primary" />, title: "Superar momentos difíceis", desc: "Desenvolva resiliência para enfrentar adversidades." },
-              { icon: <Compass className="w-6 h-6 text-primary" />, title: "Desenvolver autoconhecimento", desc: "Descubra aspectos importantes sobre você mesmo." },
-              { icon: <Sparkles className="w-6 h-6 text-primary" />, title: "Saúde emocional", desc: "Fortaleça seu bem-estar psicológico." },
-            ].map((item, i) => (
-              <motion.div key={i} variants={fadeInUp}>
-                <Card className="h-full border-none shadow-sm hover:shadow-md transition-all duration-300 bg-secondary/20">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
-                      {item.icon}
-                    </div>
-                    <CardTitle className="font-serif text-xl">{item.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base text-muted-foreground">{item.desc}</CardDescription>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Transitional Section */}
-      <section className="py-24 bg-secondary/20">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="w-full md:w-1/2"
-            >
-              <img
-                src={spaceImg}
-                alt="Espaço de atendimento"
-                className="w-full rounded-2xl shadow-xl object-cover aspect-[4/3]"
-              />
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-              className="w-full md:w-1/2"
-            >
-              <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Um espaço de acolhimento e transformação</h2>
-              <p className="text-lg text-foreground/80 leading-relaxed mb-10">
-                A terapia não é apenas para momentos de crise. É uma jornada de autoconhecimento que pode transformar positivamente todas as áreas da sua vida. Permita-se cuidar da sua saúde emocional com o mesmo carinho que cuida da saúde física.
-              </p>
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-14 text-base font-medium shadow-sm"
-                onClick={() => {
-  trackWhatsappClick("whatsapp_click_section");
-  window.open(WHATSAPP_LINK, "_blank");
-}}
-              >
-                Começar meu processo terapêutico
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Sobre a Psicóloga */}
       <section id="sobre" className="py-24 bg-white">
         <div className="container mx-auto px-6 max-w-6xl">
@@ -445,6 +357,99 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* A Importância da Psicoterapia */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">A importância da psicoterapia para sua saúde emocional</h2>
+            <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+          </motion.div>
+
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            {[
+              { icon: <Heart className="w-6 h-6 text-primary" />, title: "Entender suas emoções", desc: "Compreenda melhor o que você sente e por quê." },
+              { icon: <Users className="w-6 h-6 text-primary" />, title: "Melhorar relacionamentos", desc: "Desenvolva conexões mais saudáveis e significativas." },
+              { icon: <Brain className="w-6 h-6 text-primary" />, title: "Reduzir ansiedade", desc: "Aprenda técnicas para lidar com preocupações excessivas." },
+              { icon: <Sun className="w-6 h-6 text-primary" />, title: "Lidar com depressão", desc: "Encontre luz mesmo nos momentos mais difíceis." },
+              { icon: <Shield className="w-6 h-6 text-primary" />, title: "Superar momentos difíceis", desc: "Desenvolva resiliência para enfrentar adversidades." },
+              { icon: <Compass className="w-6 h-6 text-primary" />, title: "Desenvolver autoconhecimento", desc: "Descubra aspectos importantes sobre você mesmo." },
+              { icon: <Sparkles className="w-6 h-6 text-primary" />, title: "Saúde emocional", desc: "Fortaleça seu bem-estar psicológico." },
+            ].map((item, i) => (
+              <motion.div key={i} variants={fadeInUp}>
+                <Card className="h-full border-none shadow-sm hover:shadow-md transition-all duration-300 bg-secondary/20">
+                  <CardHeader>
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm">
+                      {item.icon}
+                    </div>
+                    <CardTitle className="font-serif text-xl">{item.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-base text-muted-foreground">{item.desc}</CardDescription>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Transitional Section */}
+      <section className="py-24 bg-secondary/20">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="w-full md:w-1/2"
+            >
+              <img
+                src={spaceImg}
+                alt="Espaço de atendimento"
+                className="w-full rounded-2xl shadow-xl object-cover aspect-[4/3]"
+              />
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="w-full md:w-1/2"
+            >
+              <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Um espaço de acolhimento e transformação</h2>
+              <p className="text-lg text-foreground/80 leading-relaxed mb-10">
+                A terapia não é apenas para momentos de crise. É uma jornada de autoconhecimento que pode transformar positivamente todas as áreas da sua vida. Permita-se cuidar da sua saúde emocional com o mesmo carinho que cuida da saúde física.
+              </p>
+              <Button
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-14 text-base font-medium shadow-sm"
+                onClick={() => {
+  trackWhatsappClick("whatsapp_click_section");
+  window.open(WHATSAPP_LINK, "_blank");
+}}
+              >
+                Começar meu processo terapêutico
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
 
       {/* Como Posso Ajudar */}
       <section id="especialidades" className="py-24 bg-secondary/30">
