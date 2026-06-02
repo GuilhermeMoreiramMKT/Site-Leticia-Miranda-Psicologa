@@ -251,6 +251,45 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+{/* Como Posso Ajudar */}
+      <section id="especialidades" className="py-24 bg-secondary/30">
+        <div className="container mx-auto px-1 max-w-6xl">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Como a psicoterapia online pode te ajudar</h2>
+            <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { title: "Ansiedade", desc: "Compreenda e gerencie a ansiedade para viver com mais tranquilidade." },
+              { title: "Depressão", desc: "Encontre caminhos para superar a depressão e redescobrir a alegria." },
+              { title: "Luto", desc: "Apoio no processo de elaboração do luto e perdas significativas." },
+              { title: "Relacionamentos", desc: "Melhore seus vínculos afetivos e relações interpessoais." },
+              { title: "Compulsão alimentar", desc: "Trabalhe sua relação com a comida de forma saudável." },
+              { title: "Identidade e autoconhecimento", desc: "Desenvolva uma compreensão profunda de si mesmo." },
+              { title: "Fortalecimento emocional", desc: "Construa resiliência e equilíbrio emocional." },
+              { title: "Dificuldades pessoais", desc: "Supere obstáculos e desafios do dia a dia." },
+              { title: "Todas as idades", desc: "Atendimento especializado para adolescentes, adultos e idosos." },
+            ].map((item, i) => (
+              <Card key={i} className="border-none shadow-sm hover:shadow-md transition-shadow bg-white">
+                <CardHeader>
+                  <CardTitle className="font-serif text-xl">{item.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{item.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Sobre a Psicóloga */}
       <section id="sobre" className="py-24 bg-white">
         <div className="container mx-auto px-1 max-w-6xl">
@@ -451,45 +490,7 @@ export default function Home() {
       </section>
 
 
-      {/* Como Posso Ajudar */}
-      <section id="especialidades" className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-1 max-w-6xl">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Como a psicoterapia online pode ajudar você</h2>
-            <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Ansiedade", desc: "Compreenda e gerencie a ansiedade para viver com mais tranquilidade." },
-              { title: "Depressão", desc: "Encontre caminhos para superar a depressão e redescobrir a alegria." },
-              { title: "Luto", desc: "Apoio no processo de elaboração do luto e perdas significativas." },
-              { title: "Relacionamentos", desc: "Melhore seus vínculos afetivos e relações interpessoais." },
-              { title: "Compulsão alimentar", desc: "Trabalhe sua relação com a comida de forma saudável." },
-              { title: "Identidade e autoconhecimento", desc: "Desenvolva uma compreensão profunda de si mesmo." },
-              { title: "Fortalecimento emocional", desc: "Construa resiliência e equilíbrio emocional." },
-              { title: "Dificuldades pessoais", desc: "Supere obstáculos e desafios do dia a dia." },
-              { title: "Todas as idades", desc: "Atendimento especializado para adolescentes, adultos e idosos." },
-            ].map((item, i) => (
-              <Card key={i} className="border-none shadow-sm hover:shadow-md transition-shadow bg-white">
-                <CardHeader>
-                  <CardTitle className="font-serif text-xl">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{item.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
       {/* Como Funciona */}
       <section id="como-funciona" className="py-24 bg-white">
         <div className="container mx-auto px-1 max-w-4xl">
