@@ -59,11 +59,7 @@ export default function Footer() {
                 <CheckCircle2 size={16} className="text-primary" />
                 Atendimento 100% online
               </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-primary" />
-                Adolescentes, adultos e idosos
-              </li>
-              <li className="flex items-center gap-2">
+                          <li className="flex items-center gap-2">
                 <CheckCircle2 size={16} className="text-primary" />
                 Sigilo profissional
               </li>

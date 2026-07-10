@@ -279,11 +279,11 @@ export default function Home() {
             </p>
 
             <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
-              Conheça melhor o atendimento
+              É muito bom te ver aqui!
             </h2>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Uma breve apresentação sobre o processo terapêutico, a escuta clínica e a forma como o atendimento online acontece.
+              O primeiro passo em busca do autoconhecimento e do cuidado emocional é o mais importante. Por isso, quero te dar as boas-vindas e te convidar a conhecer um pouco mais sobre o atendimento psicológico online que realizo.
             </p>
           </Reveal>
 
@@ -371,7 +371,7 @@ export default function Home() {
 
                   <CardContent>
                     <p className="text-muted-foreground leading-relaxed mb-6">
-                      Veja a formação acadêmica, pós-graduação, cursos complementares e o percurso profissional da psicóloga Letícia Miranda.
+                      Entenda minha formação acadêmica, pós-graduação, cursos complementares e o percurso profissional.
                     </p>
 
                     <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
@@ -396,7 +396,7 @@ export default function Home() {
 
                   <CardContent>
                     <p className="text-muted-foreground leading-relaxed mb-6">
-                      Entenda como acontece o atendimento psicológico online, duração das sessões, sigilo, agendamento e primeiro contato.
+                      Entenda como acontece o atendimento online, duração das sessões, sigilo, agendamento e primeiro contato.
                     </p>
 
                     <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
