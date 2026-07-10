@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Video, Clock, ShieldCheck, CalendarCheck, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import portraitImg from "@/assets/Leticia-foto.jpg";
 
 export default function ComoFunciona() {
   return (
@@ -15,13 +16,26 @@ export default function ComoFunciona() {
             Voltar para o início
           </Link>
 
-          <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6">
-            Como funciona o atendimento psicológico online
-          </h1>
+          <section className="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div>
+              <h1 className="font-serif text-4xl md:text-5xl text-foreground mb-6">
+                Como funciona o atendimento psicológico online
+              </h1>
 
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mb-12">
-            O atendimento online acontece por videochamada, em um espaço sigiloso e acolhedor, respeitando o tempo e a singularidade de cada pessoa.
-          </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                O atendimento online acontece por videochamada, em um espaço sigiloso e acolhedor, respeitando o tempo e a singularidade de cada pessoa.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -inset-4 bg-secondary/50 rounded-full blur-2xl -z-10"></div>
+              <img
+                src={portraitImg}
+                alt="Letícia Miranda"
+                className="w-[80%] mx-auto rounded-2xl shadow-xl relative z-10 object-cover object-top"
+              />
+            </div>
+          </section>
 
           <section className="grid gap-6">
             <div className="rounded-2xl border bg-card p-6 shadow-sm">

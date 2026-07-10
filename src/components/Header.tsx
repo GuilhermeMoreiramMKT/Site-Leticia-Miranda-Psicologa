@@ -44,6 +44,20 @@ export default function Header() {
     closeMenu();
   }
 
+  function goToContact(event: React.MouseEvent<HTMLAnchorElement>) {
+    closeMenu();
+
+    if (window.location.pathname === "/") {
+      event.preventDefault();
+
+      const contactSection = document.getElementById("contato");
+
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }
+
   return (
     <>
       <header
@@ -69,18 +83,22 @@ export default function Header() {
             <Link href="/" className="hover:text-primary transition-colors">
               Início
             </Link>
+
             <Link href="/especialidades" className="hover:text-primary transition-colors">
               Especialidades
             </Link>
+
             <Link href="/formacao" className="hover:text-primary transition-colors">
               Formação
             </Link>
+
             <Link href="/como-funciona" className="hover:text-primary transition-colors">
               Como funciona
             </Link>
-            <Link href="/#contato" className="hover:text-primary transition-colors">
+
+            <a href="/#contato" onClick={goToContact} className="hover:text-primary transition-colors">
               Contato
-            </Link>
+            </a>
           </nav>
 
           <Button
@@ -125,9 +143,9 @@ export default function Header() {
               Como funciona
             </Link>
 
-            <Link href="/#contato" onClick={closeMenu} className="text-xl font-serif text-left border-b pb-4">
+            <a href="/#contato" onClick={goToContact} className="text-xl font-serif text-left border-b pb-4">
               Contato
-            </Link>
+            </a>
 
             <Button
               className="bg-primary text-primary-foreground rounded-full py-6 text-lg mt-4"

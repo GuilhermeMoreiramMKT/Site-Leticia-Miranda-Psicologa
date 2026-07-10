@@ -1,6 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, GraduationCap, MessageCircle, PlayCircle } from "lucide-react";
+import { ArrowRight, BookOpen, GraduationCap, MessageCircle } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,18 +21,15 @@ import heroBg from "@/assets/hero-bg.png";
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
+    YT?: any;
+    onYouTubeIframeAPIReady?: () => void;
   }
 }
 
 const GOOGLE_ADS_CONVERSION_ID = "AW-18161384693/dSg7CIn0xKwcEPX5gtRD";
 const WHATSAPP_LINK = "https://dub.sh/comecarjornada";
-
-/**
- * Quando tiver o vídeo definitivo, coloque a URL incorporável aqui.
- * Exemplo YouTube embed:
- * https://www.youtube.com/embed/ID_DO_VIDEO
- */
-const PRESENTATION_VIDEO_URL = "";
+const YOUTUBE_VIDEO_ID = "_WGlN8KcVNA";
+const PRESENTATION_VIDEO_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&rel=0&modestbranding=1`;
 
 function trackWhatsappClick(eventName: string) {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -50,6 +48,10 @@ const formSchema = z.object({
 });
 
 export default function Home() {
+  const [showVideoCta, setShowVideoCta] = useState(false);
+  const youtubePlayerRef = useRef<any>(null);
+  const progressIntervalRef = useRef<number | null>(null);
+
   const submitContact = useSubmitContact();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,6 +64,88 @@ export default function Home() {
       message: "",
     },
   });
+
+  useEffect(() => {
+    if (window.location.hash === "#contato") {
+      setTimeout(() => {
+        document.getElementById("contato")?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  }, []);
+
+  useEffect(() => {
+    function clearProgressInterval() {
+      if (progressIntervalRef.current) {
+        window.clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
+    }
+
+    function startProgressCheck() {
+      clearProgressInterval();
+
+      progressIntervalRef.current = window.setInterval(() => {
+        const player = youtubePlayerRef.current;
+
+        if (!player || typeof player.getDuration !== "function" || typeof player.getCurrentTime !== "function") {
+          return;
+        }
+
+        const duration = player.getDuration();
+        const currentTime = player.getCurrentTime();
+
+        if (duration > 0 && currentTime / duration >= 0.5) {
+          setShowVideoCta(true);
+          clearProgressInterval();
+        }
+      }, 1000);
+    }
+
+    function createYoutubePlayer() {
+      if (!window.YT?.Player || youtubePlayerRef.current) return;
+
+      youtubePlayerRef.current = new window.YT.Player("presentation-youtube-player", {
+        events: {
+          onStateChange: (event: any) => {
+            const playerState = window.YT?.PlayerState;
+
+            if (!playerState) return;
+
+            if (event.data === playerState.PLAYING) {
+              startProgressCheck();
+            }
+
+            if (event.data === playerState.PAUSED || event.data === playerState.ENDED) {
+              clearProgressInterval();
+            }
+
+            if (event.data === playerState.ENDED) {
+              setShowVideoCta(true);
+            }
+          },
+        },
+      });
+    }
+
+    if (window.YT?.Player) {
+      createYoutubePlayer();
+    } else {
+      const existingScript = document.querySelector("script[src='https://www.youtube.com/iframe_api']");
+
+      window.onYouTubeIframeAPIReady = createYoutubePlayer;
+
+      if (!existingScript) {
+        const script = document.createElement("script");
+        script.src = "https://www.youtube.com/iframe_api";
+        script.async = true;
+        document.body.appendChild(script);
+      }
+    }
+
+    return () => {
+      clearProgressInterval();
+    };
+  }, []);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     submitContact.mutate(
@@ -141,7 +225,7 @@ export default function Home() {
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-              Atendimento psicológico online para adolescentes, adultos e idosos.
+              Atendimento psicológico online para mulheres.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mt-8">
@@ -217,26 +301,33 @@ export default function Home() {
           </motion.div>
 
           <div className="max-w-4xl mx-auto">
-            {PRESENTATION_VIDEO_URL ? (
-              <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black aspect-video">
-                <iframe
-                  src={PRESENTATION_VIDEO_URL}
-                  title="Vídeo de apresentação Letícia Miranda"
-                  className="absolute inset-0 w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            ) : (
-              <div className="relative w-full rounded-3xl shadow-xl bg-secondary/30 aspect-video flex flex-col items-center justify-center text-center px-6">
-                <PlayCircle className="w-16 h-16 text-primary mb-4" />
-                <h3 className="font-serif text-2xl text-foreground mb-2">
-                  Vídeo de apresentação
-                </h3>
-                <p className="text-muted-foreground max-w-xl">
-                  Insira aqui o vídeo da Letícia. Quando o link estiver pronto, basta trocar a variável <strong>PRESENTATION_VIDEO_URL</strong> no código.
-                </p>
-              </div>
+            <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black aspect-video">
+              <iframe
+                id="presentation-youtube-player"
+                src={PRESENTATION_VIDEO_URL}
+                title="Vídeo de apresentação Letícia Miranda"
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+
+            {showVideoCta && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="mt-8 flex justify-center"
+              >
+                <Button
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-14 text-base font-medium shadow-sm gap-2"
+                  onClick={() => openWhatsapp("whatsapp_click_video_half")}
+                >
+                  <FaWhatsapp className="text-xl" />
+                  Quero conversar sobre a terapia
+                </Button>
+              </motion.div>
             )}
           </div>
         </div>
