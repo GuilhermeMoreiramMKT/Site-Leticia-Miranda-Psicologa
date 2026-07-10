@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { useSubmitContact } from "@/lib/api";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 import heroBg from "@/assets/hero-bg.png";
 
 declare global {
@@ -201,7 +202,6 @@ export default function Home() {
     <div className="min-h-[100dvh] bg-background text-foreground font-sans overflow-x-hidden">
       <Header />
 
-      {/* Hero */}
       <section id="home" className="relative min-h-[90vh] flex items-center pt-20">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40 z-10"></div>
@@ -209,13 +209,7 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-4 max-w-6xl relative z-20">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="max-w-2xl"
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="max-w-2xl">
             <motion.p variants={fadeInUp} className="text-sm font-semibold tracking-widest uppercase text-muted-foreground mb-4">
               Letícia Miranda | Psicóloga Clínica | CRP 06/180091
             </motion.p>
@@ -277,16 +271,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Vídeo de apresentação */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center max-w-3xl mx-auto mb-12"
-          >
+          <Reveal className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-sm font-semibold tracking-widest uppercase text-muted-foreground mb-4">
               Apresentação
             </p>
@@ -298,9 +285,9 @@ export default function Home() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               Uma breve apresentação sobre o processo terapêutico, a escuta clínica e a forma como o atendimento online acontece.
             </p>
-          </motion.div>
+          </Reveal>
 
-          <div className="max-w-4xl mx-auto">
+          <Reveal delay={0.08} className="max-w-4xl mx-auto">
             <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black aspect-video">
               <iframe
                 id="presentation-youtube-player"
@@ -329,20 +316,13 @@ export default function Home() {
                 </Button>
               </motion.div>
             )}
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Cards de navegação */}
       <section className="py-24 bg-secondary/20">
         <div className="container mx-auto px-4 max-w-6xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
+          <Reveal className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
               Encontre o que você precisa saber
             </h2>
@@ -350,92 +330,91 @@ export default function Home() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               Acesse as principais informações sobre o atendimento, a formação profissional e as áreas de cuidado clínico.
             </p>
-          </motion.div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link href="/especialidades">
-              <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
-                    <BookOpen className="w-6 h-6 text-primary" />
-                  </div>
+            <Reveal delay={0}>
+              <Link href="/especialidades">
+                <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
+                      <BookOpen className="w-6 h-6 text-primary" />
+                    </div>
 
-                  <CardTitle className="font-serif text-2xl">
-                    Especialidades
-                  </CardTitle>
-                </CardHeader>
+                    <CardTitle className="font-serif text-2xl">Especialidades</CardTitle>
+                  </CardHeader>
 
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Conheça as principais demandas atendidas, como ansiedade, depressão, luto, relacionamentos, compulsão alimentar e autoconhecimento.
-                  </p>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                      Conheça as principais demandas atendidas, como ansiedade, depressão, luto, relacionamentos, compulsão alimentar e autoconhecimento.
+                    </p>
 
-                  <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                    Ver especialidades
-                    <ArrowRight size={18} />
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
+                    <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
+                      Ver especialidades
+                      <ArrowRight size={18} />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Reveal>
 
-            <Link href="/formacao">
-              <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
-                    <GraduationCap className="w-6 h-6 text-primary" />
-                  </div>
+            <Reveal delay={0.08}>
+              <Link href="/formacao">
+                <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
+                      <GraduationCap className="w-6 h-6 text-primary" />
+                    </div>
 
-                  <CardTitle className="font-serif text-2xl">
-                    Formação
-                  </CardTitle>
-                </CardHeader>
+                    <CardTitle className="font-serif text-2xl">Formação</CardTitle>
+                  </CardHeader>
 
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Veja a formação acadêmica, pós-graduação, cursos complementares e o percurso profissional da psicóloga Letícia Miranda.
-                  </p>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                      Veja a formação acadêmica, pós-graduação, cursos complementares e o percurso profissional da psicóloga Letícia Miranda.
+                    </p>
 
-                  <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                    Ver formação
-                    <ArrowRight size={18} />
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
+                    <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
+                      Ver formação
+                      <ArrowRight size={18} />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Reveal>
 
-            <Link href="/como-funciona">
-              <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
-                    <MessageCircle className="w-6 h-6 text-primary" />
-                  </div>
+            <Reveal delay={0.16}>
+              <Link href="/como-funciona">
+                <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
+                      <MessageCircle className="w-6 h-6 text-primary" />
+                    </div>
 
-                  <CardTitle className="font-serif text-2xl">
-                    Como funciona
-                  </CardTitle>
-                </CardHeader>
+                    <CardTitle className="font-serif text-2xl">Como funciona</CardTitle>
+                  </CardHeader>
 
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Entenda como acontece o atendimento psicológico online, duração das sessões, sigilo, agendamento e primeiro contato.
-                  </p>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                      Entenda como acontece o atendimento psicológico online, duração das sessões, sigilo, agendamento e primeiro contato.
+                    </p>
 
-                  <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                    Entender o atendimento
-                    <ArrowRight size={18} />
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
+                    <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
+                      Entender o atendimento
+                      <ArrowRight size={18} />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Contato */}
       <section id="contato" className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="flex flex-col lg:flex-row gap-16">
-            <div className="w-full lg:w-1/2">
+            <Reveal className="w-full lg:w-1/2">
               <h2 className="font-serif text-4xl text-foreground mb-6">
                 Comece sua jornada de autoconhecimento com a terapia online
               </h2>
@@ -478,9 +457,9 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="w-full lg:w-1/2 bg-secondary/10 p-8 rounded-3xl">
+            <Reveal delay={0.08} className="w-full lg:w-1/2 bg-secondary/10 p-8 rounded-3xl">
               <h3 className="font-serif text-2xl mb-6">Entre em contato</h3>
 
               <Form {...form}>
@@ -579,7 +558,7 @@ export default function Home() {
                   </Button>
                 </form>
               </Form>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
