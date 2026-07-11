@@ -208,8 +208,8 @@ export default function Home() {
           <img src={heroBg} alt="Ambiente acolhedor de atendimento psicológico" className="w-full h-full object-cover object-center" />
         </div>
 
-        <div className="container mx-auto px-4 max-w-6xl relative z-20">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="max-w-2xl">
+        <div className="container mx-auto px-4 max-w-8xl relative z-20">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="max-w-6xl">
             <motion.p variants={fadeInUp} className="text-sm font-semibold tracking-widest uppercase text-muted-foreground mb-4">
               Letícia Miranda | Psicóloga Clínica | CRP 06/180091
             </motion.p>
@@ -218,7 +218,7 @@ export default function Home() {
               Um espaço seguro para compreender sua mente, fortalecer suas emoções e enfrentar seus desafios internos.
             </motion.h1>
 
-            <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+            <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-4xl">
               Atendimento psicológico online para mulheres.
             </motion.p>
 
@@ -272,8 +272,8 @@ export default function Home() {
       </section>
 
       <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <Reveal className="text-center max-w-3xl mx-auto mb-12">
+        <div className="container mx-auto px-4 max-w-8xl">
+          <Reveal className="text-center max-w-5xl mx-auto mb-12">
             <p className="text-sm font-semibold tracking-widest uppercase text-muted-foreground mb-4">
               Apresentação
             </p>
@@ -287,7 +287,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.08} className="max-w-4xl mx-auto">
+          <Reveal delay={0.08} className="max-w-6xl mx-auto">
             <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black aspect-video">
               <iframe
                 id="presentation-youtube-player"
@@ -321,8 +321,8 @@ export default function Home() {
       </section>
 
       <section className="py-24 bg-secondary/20">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <Reveal className="text-center max-w-3xl mx-auto mb-16">
+        <div className="container mx-auto px-4 max-w-8xl">
+          <Reveal className="text-center max-w-5xl mx-auto mb-16">
             <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
               Encontre o que você precisa saber
             </h2>
@@ -412,7 +412,7 @@ export default function Home() {
       </section>
 
       <section id="contato" className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4 max-w-8xl">
           <div className="flex flex-col lg:flex-row gap-16">
             <Reveal className="w-full lg:w-1/2">
               <h2 className="font-serif text-4xl text-foreground mb-6">

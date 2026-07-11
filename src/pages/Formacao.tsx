@@ -10,7 +10,7 @@ export default function Formacao() {
       <Header />
 
       <main className="min-h-screen bg-background text-foreground px-4 py-32">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <Reveal>
             <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-10">
               <ArrowLeft size={18} />
