@@ -30,7 +30,7 @@ declare global {
 const GOOGLE_ADS_CONVERSION_ID = "AW-18161384693/dSg7CIn0xKwcEPX5gtRD";
 const WHATSAPP_LINK = "https://dub.sh/comecarjornada";
 const YOUTUBE_VIDEO_ID = "_WGlN8KcVNA";
-const PRESENTATION_VIDEO_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&cc_load_policy=0`;
+const PRESENTATION_VIDEO_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&playsinline=1&rel=0&modestbranding=1&cc_load_policy=0`;
 
 function trackWhatsappClick(eventName: string) {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
