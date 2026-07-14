@@ -30,7 +30,7 @@ declare global {
 const GOOGLE_ADS_CONVERSION_ID = "AW-18161384693/dSg7CIn0xKwcEPX5gtRD";
 const WHATSAPP_LINK = "https://dub.sh/comecarjornada";
 const YOUTUBE_VIDEO_ID = "_WGlN8KcVNA";
-const PRESENTATION_VIDEO_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&rel=0&modestbranding=1`;
+const PRESENTATION_VIDEO_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&cc_load_policy=0`;
 
 function trackWhatsappClick(eventName: string) {
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -105,9 +105,24 @@ export default function Home() {
     function createYoutubePlayer() {
       if (!window.YT?.Player || youtubePlayerRef.current) return;
 
-      youtubePlayerRef.current = new window.YT.Player("presentation-youtube-player", {
-        events: {
-          onStateChange: (event: any) => {
+     youtubePlayerRef.current = new window.YT.Player("presentation-youtube-player", {
+  events: {
+    onReady: (event: any) => {
+      try {
+        event.target.unloadModule("captions");
+        event.target.unloadModule("cc");
+      } catch (error) {
+        console.warn("Não foi possível desativar as legendas automaticamente.", error);
+      }
+    },
+
+    onStateChange: (event: any) => {
+      try {
+        event.target.unloadModule("captions");
+        event.target.unloadModule("cc");
+      } catch (error) {
+        console.warn("Não foi possível desativar as legendas automaticamente.", error);
+      }
             const playerState = window.YT?.PlayerState;
 
             if (!playerState) return;
@@ -289,14 +304,14 @@ export default function Home() {
 
           <Reveal delay={0.08} className="max-w-6xl mx-auto">
             <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black aspect-video">
-              <iframe
-                id="presentation-youtube-player"
-                src={PRESENTATION_VIDEO_URL}
-                title="Vídeo de apresentação Letícia Miranda"
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+             <iframe
+  id="presentation-youtube-player"
+  src={PRESENTATION_VIDEO_URL}
+  title="Vídeo de apresentação Letícia Miranda"
+  className="absolute inset-0 w-full h-full"
+  allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+/>
             </div>
 
             {showVideoCta && (
