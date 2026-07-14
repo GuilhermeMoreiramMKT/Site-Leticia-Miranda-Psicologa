@@ -236,130 +236,35 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.08} className="max-w-6xl mx-auto">
-            <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black aspect-video">
-  <iframe
-    id="presentation-youtube-player"
-    src={PRESENTATION_VIDEO_URL}
-    title="Vídeo de apresentação Letícia Miranda"
-    className="absolute inset-0 w-full h-full"
-    allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-  />
+           <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black">
+  <div className="relative w-full aspect-video bg-black">
+    <iframe
+      id="presentation-youtube-player"
+      src={PRESENTATION_VIDEO_URL}
+      title="Vídeo de apresentação Letícia Miranda"
+      className="absolute inset-0 w-full h-full"
+      allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
+  </div>
 
   {showVideoCta && (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
+    <motion.button
+      type="button"
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="absolute left-0 right-0 bottom-0 z-20 p-4 md:p-6 bg-gradient-to-t from-black/80 via-black/45 to-transparent"
+      onClick={() => openWhatsapp("whatsapp_click_video_half")}
+      className="w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white py-5 px-6 flex items-center justify-center gap-3 text-base md:text-lg font-medium transition-colors"
     >
-      <div className="flex justify-center">
-        <Button
-          size="lg"
-          className="bg-[#25D366] text-white hover:bg-[#1ebe5d] rounded-full px-8 h-14 text-base font-medium shadow-lg gap-2 border border-white/20"
-          onClick={() => openWhatsapp("whatsapp_click_video_half")}
-        >
-          <FaWhatsapp className="text-xl" />
-          Quero conversar sobre a terapia
-        </Button>
-      </div>
-    </motion.div>
+      <FaWhatsapp className="text-2xl" />
+      Quero conversar sobre a terapia
+    </motion.button>
   )}
 </div>
 
            
           </Reveal>
-        </div>
-      </section>
-
-      <section className="py-24 bg-secondary/20">
-        <div className="container mx-auto px-4 max-w-8xl">
-          <Reveal className="text-center max-w-5xl mx-auto mb-16">
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
-              Encontre o que você precisa saber
-            </h2>
-
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Acesse as principais informações sobre o atendimento, a formação profissional e as áreas de cuidado clínico.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Reveal delay={0}>
-              <Link href="/especialidades">
-                <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
-                      <BookOpen className="w-6 h-6 text-primary" />
-                    </div>
-
-                    <CardTitle className="font-serif text-2xl">Especialidades</CardTitle>
-                  </CardHeader>
-
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      Conheça as principais demandas atendidas, como ansiedade, depressão, luto, relacionamentos, compulsão alimentar e autoconhecimento.
-                    </p>
-
-                    <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                      Ver especialidades
-                      <ArrowRight size={18} />
-                    </span>
-                  </CardContent>
-                </Card>
-              </Link>
-            </Reveal>
-
-            <Reveal delay={0.08}>
-              <Link href="/formacao">
-                <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
-                      <GraduationCap className="w-6 h-6 text-primary" />
-                    </div>
-
-                    <CardTitle className="font-serif text-2xl">Formação</CardTitle>
-                  </CardHeader>
-
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      Entenda minha formação acadêmica, pós-graduação, cursos complementares e o percurso profissional.
-                    </p>
-
-                    <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                      Ver formação
-                      <ArrowRight size={18} />
-                    </span>
-                  </CardContent>
-                </Card>
-              </Link>
-            </Reveal>
-
-            <Reveal delay={0.16}>
-              <Link href="/como-funciona">
-                <Card className="h-full border-none shadow-sm hover:shadow-lg transition-all duration-300 bg-white cursor-pointer group">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-4">
-                      <MessageCircle className="w-6 h-6 text-primary" />
-                    </div>
-
-                    <CardTitle className="font-serif text-2xl">Como funciona</CardTitle>
-                  </CardHeader>
-
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      Entenda como acontece o atendimento online, duração das sessões, sigilo, agendamento e primeiro contato.
-                    </p>
-
-                    <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                      Entender o atendimento
-                      <ArrowRight size={18} />
-                    </span>
-                  </CardContent>
-                </Card>
-              </Link>
-            </Reveal>
-          </div>
         </div>
       </section>
 
