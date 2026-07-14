@@ -44,20 +44,6 @@ export default function Header() {
     closeMenu();
   }
 
-  function goToContact(event: React.MouseEvent<HTMLAnchorElement>) {
-    closeMenu();
-
-    if (window.location.pathname === "/") {
-      event.preventDefault();
-
-      const contactSection = document.getElementById("contato");
-
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }
-
   return (
     <>
       <header
@@ -95,10 +81,6 @@ export default function Header() {
             <Link href="/como-funciona" className="hover:text-primary transition-colors">
               Como funciona
             </Link>
-
-            <a href="/#contato" onClick={goToContact} className="hover:text-primary transition-colors">
-              Contato
-            </a>
           </nav>
 
           <Button
@@ -143,9 +125,6 @@ export default function Header() {
               Como funciona
             </Link>
 
-            <a href="/#contato" onClick={goToContact} className="text-xl font-serif text-left border-b pb-4">
-              Contato
-            </a>
 
             <Button
               className="bg-primary text-primary-foreground rounded-full py-6 text-lg mt-4"

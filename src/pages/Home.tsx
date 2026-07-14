@@ -5,15 +5,6 @@ import { ArrowRight, BookOpen, GraduationCap, MessageCircle } from "lucide-react
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { toast } from "sonner";
-import { useSubmitContact } from "@/lib/api";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -40,32 +31,12 @@ function trackWhatsappClick(eventName: string) {
   }
 }
 
-const formSchema = z.object({
-  name: z.string().min(2, "O nome deve ter pelo menos 2 caracteres."),
-  phone: z.string().min(10, "Informe um telefone válido."),
-  email: z.string().email("Informe um e-mail válido."),
-  reason: z.string().optional(),
-  message: z.string().min(10, "Sua mensagem deve ter pelo menos 10 caracteres."),
-});
-
 export default function Home() {
   const [showVideoCta, setShowVideoCta] = useState(false);
   const youtubePlayerRef = useRef<any>(null);
   const progressIntervalRef = useRef<number | null>(null);
 
-  const submitContact = useSubmitContact();
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      phone: "",
-      email: "",
-      reason: "",
-      message: "",
-    },
-  });
-
+  
   useEffect(() => {
     if (window.location.hash === "#contato") {
       setTimeout(() => {
@@ -163,36 +134,7 @@ export default function Home() {
     };
   }, []);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    submitContact.mutate(
-      { data: values },
-      {
-        onSuccess: () => {
-          if (typeof window !== "undefined" && typeof window.gtag === "function") {
-            window.gtag("event", "conversion", {
-              send_to: GOOGLE_ADS_CONVERSION_ID,
-            });
-
-            window.gtag("event", "form_submit", {
-              form_name: "contact_form",
-              page_location: window.location.href,
-            });
-          }
-
-          toast.success(
-            "Obrigada pelo seu contato. Sei que, muitas vezes, esse primeiro passo não é simples. Em breve retornarei sua mensagem!",
-            { duration: 6000 }
-          );
-
-          form.reset();
-        },
-        onError: () => {
-          toast.error("Houve um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato pelo WhatsApp.");
-        },
-      }
-    );
-  }
-
+  
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -248,16 +190,7 @@ export default function Home() {
                 Quero iniciar minha terapia
               </Button>
 
-              <a href="#contato">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full px-8 h-14 text-base font-medium border-muted-foreground/30 hover:bg-secondary/50 w-full sm:w-auto"
-                  data-testid="button-hero-cta-2"
-                >
-                  Agendar conversa
-                </Button>
-              </a>
+              
             </motion.div>
 
             <motion.div variants={fadeInUp} className="mt-12 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 text-sm text-muted-foreground">
@@ -304,33 +237,37 @@ export default function Home() {
 
           <Reveal delay={0.08} className="max-w-6xl mx-auto">
             <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black aspect-video">
-             <iframe
-  id="presentation-youtube-player"
-  src={PRESENTATION_VIDEO_URL}
-  title="Vídeo de apresentação Letícia Miranda"
-  className="absolute inset-0 w-full h-full"
-  allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowFullScreen
-/>
-            </div>
+  <iframe
+    id="presentation-youtube-player"
+    src={PRESENTATION_VIDEO_URL}
+    title="Vídeo de apresentação Letícia Miranda"
+    className="absolute inset-0 w-full h-full"
+    allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
 
-            {showVideoCta && (
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="mt-8 flex justify-center"
-              >
-                <Button
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-14 text-base font-medium shadow-sm gap-2"
-                  onClick={() => openWhatsapp("whatsapp_click_video_half")}
-                >
-                  <FaWhatsapp className="text-xl" />
-                  Quero conversar sobre a terapia
-                </Button>
-              </motion.div>
-            )}
+  {showVideoCta && (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="absolute left-0 right-0 bottom-0 z-20 p-4 md:p-6 bg-gradient-to-t from-black/80 via-black/45 to-transparent"
+    >
+      <div className="flex justify-center">
+        <Button
+          size="lg"
+          className="bg-[#25D366] text-white hover:bg-[#1ebe5d] rounded-full px-8 h-14 text-base font-medium shadow-lg gap-2 border border-white/20"
+          onClick={() => openWhatsapp("whatsapp_click_video_half")}
+        >
+          <FaWhatsapp className="text-xl" />
+          Quero conversar sobre a terapia
+        </Button>
+      </div>
+    </motion.div>
+  )}
+</div>
+
+           
           </Reveal>
         </div>
       </section>
@@ -426,157 +363,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contato" className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-8xl">
-          <div className="flex flex-col lg:flex-row gap-16">
-            <Reveal className="w-full lg:w-1/2">
-              <h2 className="font-serif text-4xl text-foreground mb-6">
-                Comece sua jornada de autoconhecimento com a terapia online
-              </h2>
-
-              <p className="text-xl text-muted-foreground mb-10">
-                Um espaço acolhedor para cuidar da sua saúde emocional e compreender sua história.
-              </p>
-
-              <div className="space-y-6 mb-10">
-                <div className="flex items-center gap-4 text-lg">
-                  <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center shrink-0">
-                    <FaWhatsapp className="text-2xl" style={{ color: "#25D366" }} />
-                  </div>
-
-                  <div>
-                    <p className="font-medium">WhatsApp</p>
-                    <a
-                      href="https://wa.me/5511947592016"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                      onClick={() => trackWhatsappClick("whatsapp_click_contact")}
-                    >
-                      (11) 94759-2016
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 text-lg">
-                  <div className="w-12 h-12 rounded-full bg-[#E1306C]/10 flex items-center justify-center shrink-0">
-                    <FaInstagram className="text-2xl" style={{ color: "#E1306C" }} />
-                  </div>
-
-                  <div>
-                    <p className="font-medium">Instagram</p>
-                    <a
-                      href="https://instagram.com/psicleticiamiranda"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      @psicleticiamiranda
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.08} className="w-full lg:w-1/2 bg-secondary/10 p-8 rounded-3xl">
-              <h3 className="font-serif text-2xl mb-6">Entre em contato</h3>
-
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Nome</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Seu nome completo" className="bg-white" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Telefone / WhatsApp</FormLabel>
-                          <FormControl>
-                            <Input placeholder="(11) 90000-0000" className="bg-white" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>E-mail</FormLabel>
-                          <FormControl>
-                            <Input placeholder="seu@email.com" className="bg-white" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <FormField
-                    control={form.control}
-                    name="reason"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Motivo do contato</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="bg-white">
-                              <SelectValue placeholder="Selecione uma opção" />
-                            </SelectTrigger>
-                          </FormControl>
-
-                          <SelectContent>
-                            <SelectItem value="primeira">Primeira consulta</SelectItem>
-                            <SelectItem value="retorno">Retorno</SelectItem>
-                            <SelectItem value="duvidas">Dúvidas sobre o atendimento</SelectItem>
-                            <SelectItem value="outro">Outro</SelectItem>
-                          </SelectContent>
-                        </Select>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Mensagem</FormLabel>
-                        <FormControl>
-                          <Textarea placeholder="Como posso ajudar?" className="bg-white min-h-[120px]" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <Button
-                    type="submit"
-                    disabled={submitContact.isPending}
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 text-base rounded-full mt-4"
-                    data-testid="button-submit-contact"
-                  >
-                    {submitContact.isPending ? "Enviando..." : "Solicitar agendamento"}
-                  </Button>
-                </form>
-              </Form>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
       <Footer />
 
