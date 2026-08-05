@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { sendMetaEvent } from "@/lib/metaPixel";
 import logoImg from "@assets/Logo_Le-removebg-preview_1778616799049.png";
 
 declare global {
@@ -40,6 +41,7 @@ export default function Header() {
 
   function openWhatsapp(eventName: string) {
     trackWhatsappClick(eventName);
+    sendMetaEvent("Contact");
     window.open(WHATSAPP_LINK, "_blank");
     closeMenu();
   }
@@ -124,7 +126,6 @@ export default function Header() {
             <Link href="/como-funciona" onClick={closeMenu} className="text-xl font-serif text-left border-b pb-4">
               Como funciona
             </Link>
-
 
             <Button
               className="bg-primary text-primary-foreground rounded-full py-6 text-lg mt-4"

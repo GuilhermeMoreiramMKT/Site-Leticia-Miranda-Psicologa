@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import Especialidades from "@/pages/Especialidades";
 import Formacao from "@/pages/Formacao";
 import ComoFunciona from "@/pages/ComoFunciona";
+import { sendMetaEvent } from "@/lib/metaPixel";
 
 declare global {
   interface Window {
@@ -19,7 +20,6 @@ declare global {
 const queryClient = new QueryClient();
 
 const GA4_MEASUREMENT_ID = "G-7PYR84MT0M";
-const GOOGLE_ADS_ID = "AW-18161384693";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -39,38 +39,26 @@ function ScrollToTop() {
 
 function TrackPageViews() {
   const [location] = useLocation();
-  const isFirstLoad = useRef(true);
 
   useEffect(() => {
-    if (typeof window === "undefined" || typeof window.gtag !== "function") {
-      return;
-    }
+    const timeout = window.setTimeout(() => {
+      const pagePath = window.location.pathname + window.location.search + window.location.hash;
+      const pageLocation = window.location.href;
+      const pageTitle = document.title;
 
-    /**
-     * O carregamento inicial já é registrado pelo script do Google Tag no index.html.
-     * Aqui evitamos duplicar o primeiro page_view e registramos apenas mudanças internas de rota.
-     */
-    if (isFirstLoad.current) {
-      isFirstLoad.current = false;
-      return;
-    }
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "page_view", {
+          send_to: GA4_MEASUREMENT_ID,
+          page_title: pageTitle,
+          page_location: pageLocation,
+          page_path: pagePath,
+        });
+      }
 
-    const pagePath = window.location.pathname + window.location.search + window.location.hash;
-    const pageLocation = window.location.href;
-    const pageTitle = document.title;
+      sendMetaEvent("PageView");
+    }, 300);
 
-    window.gtag("event", "page_view", {
-      send_to: GA4_MEASUREMENT_ID,
-      page_title: pageTitle,
-      page_location: pageLocation,
-      page_path: pagePath,
-    });
-
-    window.gtag("config", GOOGLE_ADS_ID, {
-      page_title: pageTitle,
-      page_location: pageLocation,
-      page_path: pagePath,
-    });
+    return () => window.clearTimeout(timeout);
   }, [location]);
 
   return null;
