@@ -26,7 +26,7 @@ export async function sendMetaEvent(eventName: MetaEventName) {
   const eventSourceUrl = window.location.href;
 
   if (typeof window.fbq === "function") {
-    window.fbq("track", eventName, {}, { eventID: eventId });
+    window.fbq("trackSingle", "4539639952958853", eventName, {}, { eventID: eventId });
   }
 
   try {
