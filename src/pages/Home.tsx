@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import { Link } from "wouter";
-import { ArrowRight, BookOpen, GraduationCap, MessageCircle } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import { sendMetaEvent } from "@/lib/metaPixel";
 import heroBg from "@/assets/hero-bg.png";
 
 declare global {
@@ -18,7 +16,6 @@ declare global {
   }
 }
 
-const GOOGLE_ADS_CONVERSION_ID = "AW-18161384693/dSg7CIn0xKwcEPX5gtRD";
 const WHATSAPP_LINK = "https://dub.sh/comecarjornada";
 const YOUTUBE_VIDEO_ID = "_WGlN8KcVNA";
 const PRESENTATION_VIDEO_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&playsinline=1&rel=0&modestbranding=1&cc_load_policy=0`;
@@ -36,7 +33,6 @@ export default function Home() {
   const youtubePlayerRef = useRef<any>(null);
   const progressIntervalRef = useRef<number | null>(null);
 
-  
   useEffect(() => {
     if (window.location.hash === "#contato") {
       setTimeout(() => {
@@ -76,24 +72,25 @@ export default function Home() {
     function createYoutubePlayer() {
       if (!window.YT?.Player || youtubePlayerRef.current) return;
 
-     youtubePlayerRef.current = new window.YT.Player("presentation-youtube-player", {
-  events: {
-    onReady: (event: any) => {
-      try {
-        event.target.unloadModule("captions");
-        event.target.unloadModule("cc");
-      } catch (error) {
-        console.warn("Não foi possível desativar as legendas automaticamente.", error);
-      }
-    },
+      youtubePlayerRef.current = new window.YT.Player("presentation-youtube-player", {
+        events: {
+          onReady: (event: any) => {
+            try {
+              event.target.unloadModule("captions");
+              event.target.unloadModule("cc");
+            } catch (error) {
+              console.warn("Não foi possível desativar as legendas automaticamente.", error);
+            }
+          },
 
-    onStateChange: (event: any) => {
-      try {
-        event.target.unloadModule("captions");
-        event.target.unloadModule("cc");
-      } catch (error) {
-        console.warn("Não foi possível desativar as legendas automaticamente.", error);
-      }
+          onStateChange: (event: any) => {
+            try {
+              event.target.unloadModule("captions");
+              event.target.unloadModule("cc");
+            } catch (error) {
+              console.warn("Não foi possível desativar as legendas automaticamente.", error);
+            }
+
             const playerState = window.YT?.PlayerState;
 
             if (!playerState) return;
@@ -134,7 +131,6 @@ export default function Home() {
     };
   }, []);
 
-  
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -152,7 +148,13 @@ export default function Home() {
 
   function openWhatsapp(eventName: string) {
     trackWhatsappClick(eventName);
+    sendMetaEvent("Contact");
     window.open(WHATSAPP_LINK, "_blank");
+  }
+
+  function trackDirectWhatsappClick(eventName: string) {
+    trackWhatsappClick(eventName);
+    sendMetaEvent("Contact");
   }
 
   return (
@@ -189,8 +191,6 @@ export default function Home() {
                 <FaWhatsapp className="text-xl" />
                 Quero iniciar minha terapia
               </Button>
-
-              
             </motion.div>
 
             <motion.div variants={fadeInUp} className="mt-12 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 text-sm text-muted-foreground">
@@ -199,7 +199,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 hover:text-foreground transition-colors"
-                onClick={() => trackWhatsappClick("whatsapp_click_phone_link")}
+                onClick={() => trackDirectWhatsappClick("whatsapp_click_phone_link")}
               >
                 <FaWhatsapp className="text-xl" />
                 (11) 94759-2016
@@ -236,44 +236,41 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.08} className="max-w-6xl mx-auto">
-           <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black">
-  <div className="relative w-full aspect-video bg-black">
-    <iframe
-      id="presentation-youtube-player"
-      src={PRESENTATION_VIDEO_URL}
-      title="Vídeo de apresentação Letícia Miranda"
-      className="absolute inset-0 w-full h-full"
-      allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    />
-  </div>
+            <div className="relative w-full overflow-hidden rounded-3xl shadow-xl bg-black">
+              <div className="relative w-full aspect-video bg-black">
+                <iframe
+                  id="presentation-youtube-player"
+                  src={PRESENTATION_VIDEO_URL}
+                  title="Vídeo de apresentação Letícia Miranda"
+                  className="absolute inset-0 w-full h-full"
+                  allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
 
-  {showVideoCta && (
-    <motion.button
-      type="button"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      onClick={() => openWhatsapp("whatsapp_click_video_half")}
-      className="w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white py-5 px-6 flex items-center justify-center gap-3 text-base md:text-lg font-medium transition-colors"
-    >
-      <FaWhatsapp className="text-2xl" />
-      Quero conversar sobre a terapia
-    </motion.button>
-  )}
-</div>
-
-           
+              {showVideoCta && (
+                <motion.button
+                  type="button"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  onClick={() => openWhatsapp("whatsapp_click_video_half")}
+                  className="w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white py-5 px-6 flex items-center justify-center gap-3 text-base md:text-lg font-medium transition-colors"
+                >
+                  <FaWhatsapp className="text-2xl" />
+                  Quero conversar sobre a terapia
+                </motion.button>
+              )}
+            </div>
           </Reveal>
         </div>
       </section>
-
 
       <Footer />
 
       <a
         href={WHATSAPP_LINK}
-        onClick={() => trackWhatsappClick("whatsapp_click_link")}
+        onClick={() => trackDirectWhatsappClick("whatsapp_click_link")}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50"
