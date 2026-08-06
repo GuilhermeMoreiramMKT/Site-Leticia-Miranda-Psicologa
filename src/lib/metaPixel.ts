@@ -35,6 +35,7 @@ export async function sendMetaEvent(eventName: MetaEventName) {
       headers: {
         "Content-Type": "application/json",
       },
+      keepalive: true,
       body: JSON.stringify({
         event_name: eventName,
         event_id: eventId,
